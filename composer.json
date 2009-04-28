@@ -1,0 +1,38 @@
+{
+    "name": "zendframework/zend-memory",
+    "description": "Zend\\Memory component",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "memory"
+    ],
+    "homepage": "https://github.com/zendframework/zend-memory",
+    "autoload": {
+        "psr-4": {
+            "Zend\\Memory\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.23"
+    },
+    "require-dev": {
+        "zendframework/zend-cache": "self.version",
+        "fabpot/php-cs-fixer": "1.7.*",
+        "satooshi/php-coveralls": "dev-master",
+        "phpunit/PHPUnit": "~4.0"
+    },
+    "suggest": {
+        "zendframework/zend-cache": "To support swap the memory objects"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.4-dev",
+            "dev-develop": "2.5-dev"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZendTest\\Memory\\": "test/"
+        }
+    }
+}
