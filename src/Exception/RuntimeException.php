@@ -15,25 +15,27 @@
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @namespace
  */
-namespace Zend\Memory\Container;
-
-use Zend\Memory\Container;
+namespace Zend\Memory\Exception;
+use Zend\Memory\Exception;
 
 /**
- * Memory value container
+ * Exception for Zend_Memory component.
  *
- * @uses       \Zend\Memory\Container
+ * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractContainer implements Container
+class RuntimeException
+    extends \RuntimeException
+    implements Exception
 {
 }
