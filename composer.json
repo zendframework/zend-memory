@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-memory",
-    "description": "Zend\\Memory component",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -9,11 +9,11 @@
     "homepage": "https://github.com/zendframework/zend-memory",
     "autoload": {
         "psr-4": {
-            "Zend\\Memory\\": "src/"
+            "Zend\\Memory": "src/"
         }
     },
     "require": {
-        "php": ">=5.3.23"
+        "php": ">=5.3.3"
     },
     "require-dev": {
         "zendframework/zend-cache": "self.version",
