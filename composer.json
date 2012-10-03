@@ -9,7 +9,7 @@
     "homepage": "https://github.com/zendframework/zend-memory",
     "autoload": {
         "psr-4": {
-            "Zend\\Memory": "src/"
+            "Zend\\Memory\\": "src/"
         }
     },
     "require": {
