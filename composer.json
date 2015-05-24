@@ -24,6 +24,8 @@
     "suggest": {
         "zendframework/zend-cache": "To support swap the memory objects"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "2.4-dev",
