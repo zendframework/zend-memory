@@ -1,7 +1,7 @@
 # zend-memory
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-memory.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-memory)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zend-memory/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-memory)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zend-memory/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-memory?branch=master)
 
 The `Zend\Memory` component is intended to manage data in an environment with
 limited memory.
