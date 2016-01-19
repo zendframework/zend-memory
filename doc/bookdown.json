@@ -1,0 +1,9 @@
+{
+    "title": "Zend\\Memory",
+    "target": "html/",
+    "content": [
+        "book/zend.memory.overview.md",
+        "book/zend.memory.memory-manager.md",
+        "book/zend.memory.memory-objects.md"
+    ]
+}
