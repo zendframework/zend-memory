@@ -77,7 +77,7 @@ echo ord($memObject->value[$index1]);
 $memObject->value = substr($memObject->value, $start, $length);
 ```
 
-> ## Note
+> ### Note
 If you are using a *PHP* version earlier than 5.2, use the getRef()
 &lt;zend.memory.memory-objects.api.getRef&gt; method instead of accessing the value property
 directly.
