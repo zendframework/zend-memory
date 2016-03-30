@@ -46,10 +46,10 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
 
 `Zend\Memory` component operates with the following concepts:
 
-> -   Memory manager
-- Memory container
-- Locked memory object
-- Movable memory object
+* Memory manager
+* Memory container
+* Locked memory object
+* Movable memory object
 
 ### Memory manager
 
