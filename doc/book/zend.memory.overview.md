@@ -13,7 +13,7 @@ way, the total memory used by managed objects does not exceed the limit you need
 
 The memory manager uses \[ZendCache backends\](zend.cache.backends) as storage providers.
 
-**Using ZendMemory component**
+### Using ZendMemory component
 
 `Zend\Memory\Memory::factory()` instantiates the memory manager class with specified backend
 options.
