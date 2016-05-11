@@ -23,11 +23,11 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
      *
      * @var CacheAdapter
      */
-    private $_cache = null;
+    private $cache = null;
 
     public function setUp()
     {
-        $this->_cache = CacheFactory::adapterFactory('memory', ['memory_limit' => 0]);
+        $this->cache = CacheFactory::adapterFactory('memory', ['memory_limit' => 0]);
     }
 
     /**
@@ -37,12 +37,12 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     {
         /** Without caching */
         $memoryManager = new Memory\MemoryManager();
-        $this->assertInstanceOf('Zend\Memory\MemoryManager', $memoryManager);
+        $this->assertInstanceOf(Memory\MemoryManager::class, $memoryManager);
         unset($memoryManager);
 
         /** Caching using 'File' backend */
-        $memoryManager = new Memory\MemoryManager($this->_cache);
-        $this->assertInstanceOf('Zend\Memory\MemoryManager', $memoryManager);
+        $memoryManager = new Memory\MemoryManager($this->cache);
+        $this->assertInstanceOf(Memory\MemoryManager::class, $memoryManager);
         unset($memoryManager);
     }
 
@@ -51,7 +51,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettings()
     {
-        $memoryManager = new Memory\MemoryManager($this->_cache);
+        $memoryManager = new Memory\MemoryManager($this->cache);
 
         // MemoryLimit
         $memoryManager->setMemoryLimit(2*1024*1024 /* 2Mb */);
@@ -68,22 +68,22 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        $memoryManager = new Memory\MemoryManager($this->_cache);
+        $memoryManager = new Memory\MemoryManager($this->cache);
 
         $memObject1 = $memoryManager->create('Value of object 1');
-        $this->assertInstanceOf('Zend\Memory\Container\AccessController', $memObject1);
+        $this->assertInstanceOf(Memory\Container\AccessController::class, $memObject1);
         $this->assertEquals($memObject1->getRef(), 'Value of object 1');
 
         $memObject2 = $memoryManager->create();
-        $this->assertInstanceOf('Zend\Memory\Container\AccessController', $memObject2);
+        $this->assertInstanceOf(Memory\Container\AccessController::class, $memObject2);
         $this->assertEquals($memObject2->getRef(), '');
 
         $memObject3 = $memoryManager->createLocked('Value of object 3');
-        $this->assertInstanceOf('Zend\Memory\Container\Locked', $memObject3);
+        $this->assertInstanceOf(Memory\Container\Locked::class, $memObject3);
         $this->assertEquals($memObject3->getRef(), 'Value of object 3');
 
         $memObject4 = $memoryManager->createLocked();
-        $this->assertInstanceOf('Zend\Memory\Container\Locked', $memObject4);
+        $this->assertInstanceOf(Memory\Container\Locked::class, $memObject4);
         $this->assertEquals($memObject4->getRef(), '');
     }
 
@@ -92,7 +92,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessing()
     {
-        $memoryManager = new Memory\MemoryManager($this->_cache);
+        $memoryManager = new Memory\MemoryManager($this->cache);
 
         $memoryManager->setMinSize(256);
         $memoryManager->setMemoryLimit(1024*32);
@@ -118,7 +118,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testNotEnoughSpaceThrowException()
     {
-        $memoryManager = new Memory\MemoryManager($this->_cache);
+        $memoryManager = new Memory\MemoryManager($this->cache);
 
         $memoryManager->setMinSize(128);
         $memoryManager->setMemoryLimit(1024);
@@ -129,7 +129,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
             $memObjects[] = $memObject;
         }
 
-        $this->setExpectedException('Zend\Memory\Exception\RuntimeException');
+        $this->setExpectedException(Memory\Exception\RuntimeException::class);
         $memoryManager->create('a');
     }
 }

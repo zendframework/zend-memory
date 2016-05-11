@@ -22,10 +22,10 @@ class MovableTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreation()
     {
-        $memoryManager = new DummyMemoryManager();
+        $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
-        $this->assertInstanceOf('Zend\Memory\Container\Movable', $memObject);
+        $this->assertInstanceOf(Container\Movable::class, $memObject);
     }
 
     /**
@@ -33,7 +33,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueAccess()
     {
-        $memoryManager = new DummyMemoryManager();
+        $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
         // getRef() method
@@ -50,7 +50,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
-        $this->assertInstanceOf('Zend\Memory\Value', $memObject->value);
+        $this->assertInstanceOf(Memory\Value::class, $memObject->value);
         $this->assertEquals((string) $memObject->value, 'another value');
     }
 
@@ -59,7 +59,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
      */
     public function testLock()
     {
-        $memoryManager = new DummyMemoryManager();
+        $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
         $this->assertFalse($memObject->isLocked());
@@ -76,7 +76,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
      */
     public function testTouch()
     {
-        $memoryManager = new DummyMemoryManager();
+        $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
         $this->assertFalse($memoryManager->processUpdatePassed);
@@ -93,7 +93,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueUpdateTracing()
     {
-        $memoryManager = new DummyMemoryManager();
+        $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
 
         // startTrace() method is usually invoked by memory manager, when it need to be notified
@@ -111,50 +111,17 @@ class MovableTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidGetThrowException()
     {
-        $memoryManager = new DummyMemoryManager();
+        $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
-        $this->setExpectedException('Zend\Memory\Exception\InvalidArgumentException');
+        $this->setExpectedException(Memory\Exception\InvalidArgumentException::class);
         $value = $memObject->unknowProperty;
     }
 
     public function testInvalidSetThrowException()
     {
-        $memoryManager = new DummyMemoryManager();
+        $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
-        $this->setExpectedException('Zend\Memory\Exception\InvalidArgumentException');
+        $this->setExpectedException(Memory\Exception\InvalidArgumentException::class);
         $memObject->unknowProperty = 5;
-    }
-}
-
-/**
- * Memory manager helper
- */
-class DummyMemoryManager extends Memory\MemoryManager
-{
-    /** @var bool */
-    public $processUpdatePassed = false;
-
-    /** @var integer */
-    public $processedId;
-
-    /** @var Container\Movable */
-    public $processedObject;
-
-    /**
-     * Empty constructor
-     */
-    public function __construct()
-    {
-        // Do nothing
-    }
-
-    /**
-     * DummyMemoryManager value update callback method
-     */
-    public function processUpdate(Container\Movable $container, $id)
-    {
-        $this->processUpdatePassed = true;
-        $this->processedId         = $id;
-        $this->processedObject     = $container;
     }
 }
