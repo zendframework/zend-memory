@@ -222,7 +222,7 @@ class MemoryManager
      */
     public function create($value = '')
     {
-        return $this->_create($value, false);
+        return $this->createContainer($value, false);
     }
 
     /**
@@ -235,22 +235,23 @@ class MemoryManager
      */
     public function createLocked($value = '')
     {
-        return $this->_create($value, true);
+        return $this->createContainer($value, true);
     }
 
     /**
-     * Create new Zend\Memory object
+     * Create new Zend\Memory container object
      *
      * @param string $value
      * @param  bool $locked
-     * @return \Zend\Memory\Container\ContainerInterface
-     * @throws \Zend\Memory\Exception\ExceptionInterface
+     * @return Container\ContainerInterface
+     * @throws Exception\ExceptionInterface
      */
-    private function _create($value, $locked)
+    private function createContainer($value, $locked)
     {
         $id = $this->nextId++;
 
-        if ($locked  ||  ($this->cache === null) /* Use only memory locked objects if backend is not specified */) {
+        // Use only memory locked objects if backend is not specified
+        if ($locked  || ($this->cache === null)) {
             return new Container\Locked($value);
         }
 
@@ -261,7 +262,8 @@ class MemoryManager
 
         // Store last object size as 0
         $this->sizes[$id] = 0;
-        // prepare object for next modifications
+
+        // Prepare object for next modifications
         $this->lastModified = $valueObject;
 
         return new Container\AccessController($valueObject);
