@@ -18,19 +18,11 @@
     
 
     
-        
     <url>
-     <loc>None/memory-manager/</loc>
+     <loc>None/adapter/</loc>
      <lastmod>2016-05-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    <url>
-     <loc>None/memory-objects/</loc>
-     <lastmod>2016-05-11</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
     
 
 </urlset>
