@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Memory Manager - zend-memory</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-memory</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../intro/">Intro</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li class="active">
+    <a href="./">Memory Manager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../memory-objects/">Memory Objects</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-memory">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#memory-manager">Memory Manager</a></li>
+        
+            <li><a href="#creating-a-memory-manager">Creating a Memory Manager</a></li>
+        
+            <li><a href="#managing-memory-objects">Managing Memory Objects</a></li>
+        
+            <li><a href="#settings">Settings</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../intro/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../memory-objects/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reference &raquo;</li>
+      
+    
+  
+  <li class="active">Memory Manager</li>
+</ol>
+
+<h1 id="memory-manager">Memory Manager</h1>
+<h2 id="creating-a-memory-manager">Creating a Memory Manager</h2>
+<p>You can create new a memory manager (<code>Zend\Memory\MemoryManager</code> object) using its constructor:</p>
+<pre class="codehilite"><code class="language-php">__construct(Zend\Cache\Storage\StorageInterface $cache = null) : void</code></pre>
+
+
+<p>As an example, the following creates an instance which <em>is not</em> backed by cache
+storage:</p>
+<pre class="codehilite"><code class="language-php">$memoryManager = new Zend\Memory\MemoryManager();</code></pre>
+
+
+<p>While the following creates an instance backed by a filesystem cache storage
+adapter, storing memory blocks in the <code>tmp/</code> directory of the current working
+directory:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Cache\StorageFactory;
+use Zend\Memory\MemoryManager;
+
+$cache = StorageFactory::factory([
+    'adapter' =&gt; [
+        'name' =&gt; 'Filesystem',
+        'options' =&gt; [
+            'cache_dir' =&gt; './tmp/', // Directory in which to put swapped memory blocks
+        ],
+    ],
+]);
+
+$memoryManager = new MemoryManager($cache);</code></pre>
+
+
+<p>The <code>MemoryManager</code> uses <a href="http://zendframework.github.io/zend-cache/storage/adapter/">zend-cache storage adapters</a>
+to cache memory blocks; if no cache instance is provided, the system temporary
+directory is used. This is useful if you know that memory is not limited or the
+overall size of objects never reaches the memory limit.</p>
+<h2 id="managing-memory-objects">Managing Memory Objects</h2>
+<p>This section describes creating and destroying objects in the managed memory,
+and settings to control memory manager behavior.</p>
+<h3 id="creating-movable-objects">Creating Movable Objects</h3>
+<p>Create movable objects (objects which may be swapped into cache storage) using
+the <code>Zend\Memory\MemoryManager::create([$data])</code> method:</p>
+<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);</code></pre>
+
+
+<p>The <code>$data</code> argument is optional and used to initialize the object value. If the
+<code>$data</code> argument is omitted, the value is an empty string.</p>
+<h3 id="creating-locked-objects">Creating Locked Objects</h3>
+<p>Create locked objects (objects which will never be swapped into cache storage)
+using the <code>Zend\Memory\MemoryManager::createLocked([$data])</code> method:</p>
+<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;createLocked($data);</code></pre>
+
+
+<p>The <code>$data</code> argument is optional and used to initialize the object value. If the
+<code>$data</code> argument is omitted, the value is an empty string.</p>
+<h3 id="destroying-objects">Destroying Objects</h3>
+<p>Memory objects are automatically destroyed and removed from memory when they go
+out of scope:</p>
+<pre class="codehilite"><code class="language-php">function foo() use ($memoryManager, $memList) {
+    // ...
+
+    $memObject1 = $memoryManager-&gt;create($data1);
+    $memObject2 = $memoryManager-&gt;create($data2);
+    $memObject3 = $memoryManager-&gt;create($data3);
+
+    // ...
+
+    $memList[] = $memObject3;
+
+    // ...
+
+    unset($memObject2); // $memObject2 is destroyed here
+
+    // ...
+    // $memObject1 is destroyed here
+    // but $memObject3 object is still referenced by $memList
+    // and is not destroyed
+}</code></pre>
+
+
+<p>This applies to both movable and locked objects.</p>
+<h2 id="settings">Settings</h2>
+<h3 id="memory-limit">Memory Limit</h3>
+<p>The memory limit is the maximum number of bytes allowed for use by loaded
+movable objects.</p>
+<p>If loading or creation of an object causes memory usage to exceed of this limit,
+then the memory manager swaps some other objects.</p>
+<p>You can retrieve or set the memory limit setting using the <code>getMemoryLimit()</code> and
+<code>setMemoryLimit($newLimit)</code> methods:</p>
+<pre class="codehilite"><code class="language-php">$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
+$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</code></pre>
+
+
+<p>A negative value for memory limit means 'no limit'.</p>
+<p>The default value is two-thirds of the value of <code>memory_limit</code> in <code>php.ini</code> or
+'no limit' (-1) if <code>memory_limit</code> is not set in <code>php.ini</code>.</p>
+<h3 id="minsize">MinSize</h3>
+<p>The <code>MinSize</code> is the minimum size an object must be before it will be swapped to a
+cache backend; objects with sizes smaller than this value will not be swapped.
+This reduces the number of swap/load operations.</p>
+<p>You can retrieve or set the minimum size using the <code>getMinSize()</code> and
+<code>setMinSize($newSize)</code> methods:</p>
+<pre class="codehilite"><code class="language-php">$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
+$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</code></pre>
+
+
+<p>The default minimum size value is 16KB (16384 bytes).</p>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../intro/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../memory-objects/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>
