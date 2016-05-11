@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link rel="shortcut icon" href="../img/favicon.ico">
 
-    <title>Adapters - zend-serializer</title>
+    <title>Memory Manager - zend-memory</title>
 
     <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
             <!-- Main title -->
             <span class="navbar-brand">
               <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
-              <a href="..">zend-serializer</a>
+              <a href="..">zend-memory</a>
             </span>
         </div>
 
@@ -80,8 +80,23 @@
                 
                 
                 
-                    <li class="active">
-                        <a href="./">Adapters</a>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li class="active">
+    <a href="./">Memory Manager</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../memory-objects/">Memory Objects</a>
+</li>
+
+                        
+                        </ul>
                     </li>
                 
                 
@@ -102,7 +117,7 @@
                 </li>
                 
                     <li>
-                        <a href="https://github.com/zendframework/zend-serializer">
+                        <a href="https://github.com/zendframework/zend-memory">
                             
                                 <i class="fa fa-github"></i>
                             
@@ -121,19 +136,13 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#adapters">Adapters</a></li>
+        <li class="main active"><a href="#memory-manager">Memory Manager</a></li>
         
-            <li><a href="#the-phpserialize-adapter">The PhpSerialize Adapter</a></li>
+            <li><a href="#creating-a-memory-manager">Creating a Memory Manager</a></li>
         
-            <li><a href="#the-igbinary-adapter">The IgBinary Adapter</a></li>
+            <li><a href="#managing-memory-objects">Managing Memory Objects</a></li>
         
-            <li><a href="#the-wddx-adapter">The Wddx Adapter</a></li>
-        
-            <li><a href="#the-json-adapter">The Json Adapter</a></li>
-        
-            <li><a href="#the-pythonpickle-adapter">The PythonPickle Adapter</a></li>
-        
-            <li><a href="#the-phpcode-adapter">The PhpCode Adapter</a></li>
+            <li><a href="#settings">Settings</a></li>
         
     
     </ul>
@@ -143,8 +152,8 @@
       <li class="previous">
         <a rel="prev" href="../intro/"><i class="fa fa-arrow-left"></i> Previous</a>
       </li>
-      <li class="next disabled ">
-        <a rel="next" >Next <i class="fa fa-arrow-right"></i></a>
+      <li class="next">
+        <a rel="next" href="../memory-objects/">Next <i class="fa fa-arrow-right"></i></a>
       </li>
     </ul>
     
@@ -155,238 +164,118 @@
   <li><a href="..">Docs</a> &raquo;</li>
   
     
+      
+        <li>Reference &raquo;</li>
+      
+    
   
-  <li class="active">Adapters</li>
+  <li class="active">Memory Manager</li>
 </ol>
 
-<h1 id="adapters">Adapters</h1>
-<p>zend-serializer adapters handle serialization to and deserialization from
-specific representations.</p>
-<p>Each adapter has its own strengths. In some cases, not every PHP datatype (e.g.,
-objects) can be converted to a string representation. In most such cases, the
-type will be converted to a similar type that is serializable.</p>
-<p>As an example, PHP objects will often be cast to arrays. If this fails, a
-<code>Zend\Serializer\Exception\ExceptionInterface</code> will be thrown.</p>
-<h2 id="the-phpserialize-adapter">The PhpSerialize Adapter</h2>
-<p>The <code>Zend\Serializer\Adapter\PhpSerialize</code> adapter uses the built-in
-<a href="http://php.net/serialize">serialize()</a>/<a href="http://php.net/unserialize">unserialize()</a>
-functions, and is a good default adapter choice.</p>
-<p>There are no configurable options for this adapter.</p>
-<h2 id="the-igbinary-adapter">The IgBinary Adapter</h2>
-<p><a href="http://pecl.php.net/package/igbinary">Igbinary</a> was originally released by
-Sulake Dynamoid Oy and since 2011-03-14 moved to <a href="http://pecl.php.net">PECL</a> and
-maintained by Pierre Joye. It's a drop-in replacement for the standard PHP
-serializer. Instead of using a costly textual representation, igbinary stores
-PHP data structures in a compact binary form. Savings are significant when using
-memcached or similar memory based storages for serialized data.</p>
-<p>You need the igbinary PHP extension installed on your system in order to use
-this adapter.</p>
-<p>There are no configurable options for this adapter.</p>
-<h2 id="the-wddx-adapter">The Wddx Adapter</h2>
-<p><a href="http://wikipedia.org/wiki/WDDX">WDDX</a> (Web Distributed Data eXchange) is a
-programming-language-, platform-, and transport-neutral data interchange
-mechanism for passing data between different environments and different
-computers.</p>
-<p>The adapter uses the <a href="http://php.net/wddx">wddx</a> PHP functions. Please read the
-PHP manual to determine how you may enable them in your installation.</p>
-<p>Additionally, the <a href="http://php.net/simplexml">SimpleXML</a> extension is used to
-check if a returned <code>NULL</code> value from <code>wddx_unserialize()</code> is based on a
-serialized <code>NULL</code> or on invalid data.</p>
-<p>Available options include:</p>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>comment</td>
-<td><code>string</code></td>
-<td></td>
-<td>An optional comment that appears in the packet header.</td>
-</tr>
-</tbody>
-</table></div>
-<h2 id="the-json-adapter">The Json Adapter</h2>
-<p>The <a href="http://wikipedia.org/wiki/JavaScript_Object_Notation">JSON</a> adapter provides a bridge to the
-<a href="https://zendframework.github.io/zend-json">zend-json</a> component.</p>
-<p>Available options include:</p>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Data Type</th>
-<th>Default Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>cycle_check</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-</tr>
-<tr>
-<td><code>object_decode_type</code></td>
-<td><code>Zend\Json\Json::TYPE_*</code></td>
-<td><code>Zend\Json\Json::TYPE_ARRAY</code></td>
-</tr>
-<tr>
-<td><code>enable_json_expr_finder</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-</tr>
-</tbody>
-</table></div>
-<h2 id="the-pythonpickle-adapter">The PythonPickle Adapter</h2>
-<p>This adapter converts PHP types to a <a href="http://docs.python.org/library/pickle.html">Python Pickle</a>
-string representation. With it, you can read the serialized data with Python and
-read Pickled data from Python with PHP.</p>
-<p>This adapter requires the <a href="https://zendframework.github.io/zend-math/">zend-math</a> component:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-math</code></pre>
+<h1 id="memory-manager">Memory Manager</h1>
+<h2 id="creating-a-memory-manager">Creating a Memory Manager</h2>
+<p>You can create new a memory manager (<code>Zend\Memory\MemoryManager</code> object) using its constructor:</p>
+<pre class="codehilite"><code class="language-php">__construct(Zend\Cache\Storage\StorageInterface $cache = null) : void</code></pre>
 
 
-<p>Available options include:</p>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>protocol</td>
-<td><code>integer</code> (0/1/2/3)</td>
-<td>0</td>
-<td>The Pickle protocol version used on serialize</td>
-</tr>
-</tbody>
-</table></div>
-<h3 id="datatype-merging-php-to-python-pickle">Datatype merging (PHP to Python Pickle)</h3>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>PHP Type</th>
-<th>Python Pickle Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>NULL</code></td>
-<td>None</td>
-</tr>
-<tr>
-<td><code>boolean</code></td>
-<td><code>boolean</code></td>
-</tr>
-<tr>
-<td><code>integer</code></td>
-<td><code>integer</code></td>
-</tr>
-<tr>
-<td><code>float</code></td>
-<td><code>float</code></td>
-</tr>
-<tr>
-<td><code>string</code></td>
-<td><code>string</code></td>
-</tr>
-<tr>
-<td><code>array</code> list</td>
-<td><code>list</code></td>
-</tr>
-<tr>
-<td><code>array</code> map</td>
-<td><code>dictionary</code></td>
-</tr>
-<tr>
-<td><code>object</code></td>
-<td><code>dictionary</code></td>
-</tr>
-</tbody>
-</table></div>
-<h3 id="datatype-merging-python-pickle-to-php">Datatype merging (Python Pickle to PHP)</h3>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Python Pickle Type</th>
-<th>PHP Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>None</code></td>
-<td><code>NULL</code></td>
-</tr>
-<tr>
-<td><code>boolean</code></td>
-<td><code>boolean</code></td>
-</tr>
-<tr>
-<td><code>integer</code></td>
-<td><code>integer</code></td>
-</tr>
-<tr>
-<td><code>long</code></td>
-<td><code>integer</code>, <code>float</code>, <code>string</code>, or <code>Zend\Serializer\Exception\ExceptionInterface</code></td>
-</tr>
-<tr>
-<td><code>float</code></td>
-<td><code>float</code></td>
-</tr>
-<tr>
-<td><code>string</code></td>
-<td><code>string</code></td>
-</tr>
-<tr>
-<td><code>bytes</code></td>
-<td><code>string</code></td>
-</tr>
-<tr>
-<td><code>unicode string</code></td>
-<td><code>string</code> UTF-8</td>
-</tr>
-<tr>
-<td><code>list</code></td>
-<td><code>array</code> list</td>
-</tr>
-<tr>
-<td><code>tuple</code></td>
-<td><code>array</code> list</td>
-</tr>
-<tr>
-<td><code>dictionary</code></td>
-<td><code>array</code> map</td>
-</tr>
-<tr>
-<td>All other types</td>
-<td><code>Zend\Serializer\Exception\ExceptionInterface</code></td>
-</tr>
-</tbody>
-</table></div>
-<h2 id="the-phpcode-adapter">The PhpCode Adapter</h2>
-<p>The <code>Zend\Serializer\Adapter\PhpCode</code> adapter generates a parsable PHP code
-representation using <a href="http://php.net/var_export">var_export()</a>. To restore,
-the data will be executed using <a href="http://php.net/eval">eval</a>.</p>
-<p>There are no configuration options for this adapter.</p>
-<blockquote>
-<h3 id="warning-unserializing-objects">Warning: Unserializing objects</h3>
-<p>Objects will be serialized using the
-<a href="http://php.net/language.oop5.magic#language.oop5.magic.set-state">__set_state</a> magic
-method. If the class doesn't implement this method, a fatal error will occur
-during execution.</p>
-<h3 id="warning-uses-eval">Warning: Uses eval()</h3>
-<p>The <code>PhpCode</code> adapter utilizes <code>eval()</code> to unserialize. This introduces both a
-performance and potential security issue as a new process will be executed.
-Typically, you should use the <code>PhpSerialize</code> adapter unless you require
-human-readability of the serialized data.</p>
-</blockquote>
+<p>As an example, the following creates an instance which <em>is not</em> backed by cache
+storage:</p>
+<pre class="codehilite"><code class="language-php">$memoryManager = new Zend\Memory\MemoryManager();</code></pre>
+
+
+<p>While the following creates an instance backed by a filesystem cache storage
+adapter, storing memory blocks in the <code>tmp/</code> directory of the current working
+directory:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Cache\StorageFactory;
+use Zend\Memory\MemoryManager;
+
+$cache = StorageFactory::factory([
+    'adapter' =&gt; [
+        'name' =&gt; 'Filesystem',
+        'options' =&gt; [
+            'cache_dir' =&gt; './tmp/', // Directory in which to put swapped memory blocks
+        ],
+    ],
+]);
+
+$memoryManager = new MemoryManager($cache);</code></pre>
+
+
+<p>The <code>MemoryManager</code> uses <a href="http://zendframework.github.io/zend-cache/storage/adapter/">zend-cache storage adapters</a>
+to cache memory blocks; if no cache instance is provided, the system temporary
+directory is used. This is useful if you know that memory is not limited or the
+overall size of objects never reaches the memory limit.</p>
+<h2 id="managing-memory-objects">Managing Memory Objects</h2>
+<p>This section describes creating and destroying objects in the managed memory,
+and settings to control memory manager behavior.</p>
+<h3 id="creating-movable-objects">Creating Movable Objects</h3>
+<p>Create movable objects (objects which may be swapped into cache storage) using
+the <code>Zend\Memory\MemoryManager::create([$data])</code> method:</p>
+<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);</code></pre>
+
+
+<p>The <code>$data</code> argument is optional and used to initialize the object value. If the
+<code>$data</code> argument is omitted, the value is an empty string.</p>
+<h3 id="creating-locked-objects">Creating Locked Objects</h3>
+<p>Create locked objects (objects which will never be swapped into cache storage)
+using the <code>Zend\Memory\MemoryManager::createLocked([$data])</code> method:</p>
+<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;createLocked($data);</code></pre>
+
+
+<p>The <code>$data</code> argument is optional and used to initialize the object value. If the
+<code>$data</code> argument is omitted, the value is an empty string.</p>
+<h3 id="destroying-objects">Destroying Objects</h3>
+<p>Memory objects are automatically destroyed and removed from memory when they go
+out of scope:</p>
+<pre class="codehilite"><code class="language-php">function foo() use ($memoryManager, $memList) {
+    // ...
+
+    $memObject1 = $memoryManager-&gt;create($data1);
+    $memObject2 = $memoryManager-&gt;create($data2);
+    $memObject3 = $memoryManager-&gt;create($data3);
+
+    // ...
+
+    $memList[] = $memObject3;
+
+    // ...
+
+    unset($memObject2); // $memObject2 is destroyed here
+
+    // ...
+    // $memObject1 is destroyed here
+    // but $memObject3 object is still referenced by $memList
+    // and is not destroyed
+}</code></pre>
+
+
+<p>This applies to both movable and locked objects.</p>
+<h2 id="settings">Settings</h2>
+<h3 id="memory-limit">Memory Limit</h3>
+<p>The memory limit is the maximum number of bytes allowed for use by loaded
+movable objects.</p>
+<p>If loading or creation of an object causes memory usage to exceed of this limit,
+then the memory manager swaps some other objects.</p>
+<p>You can retrieve or set the memory limit setting using the <code>getMemoryLimit()</code> and
+<code>setMemoryLimit($newLimit)</code> methods:</p>
+<pre class="codehilite"><code class="language-php">$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
+$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</code></pre>
+
+
+<p>A negative value for memory limit means 'no limit'.</p>
+<p>The default value is two-thirds of the value of <code>memory_limit</code> in <code>php.ini</code> or
+'no limit' (-1) if <code>memory_limit</code> is not set in <code>php.ini</code>.</p>
+<h3 id="minsize">MinSize</h3>
+<p>The <code>MinSize</code> is the minimum size an object must be before it will be swapped to a
+cache backend; objects with sizes smaller than this value will not be swapped.
+This reduces the number of swap/load operations.</p>
+<p>You can retrieve or set the minimum size using the <code>getMinSize()</code> and
+<code>setMinSize($newSize)</code> methods:</p>
+<pre class="codehilite"><code class="language-php">$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
+$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</code></pre>
+
+
+<p>The default minimum size value is 16KB (16384 bytes).</p>
 
 <hr />
 
@@ -396,8 +285,8 @@ human-readability of the serialized data.</p>
     <li class="previous">
       <a rel="prev" href="../intro/"><i class="fa fa-arrow-left"></i> Previous</a>
     </li>
-    <li class="next disabled ">
-      <a rel="next" >Next <i class="fa fa-arrow-right"></i></a>
+    <li class="next">
+      <a rel="next" href="../memory-objects/">Next <i class="fa fa-arrow-right"></i></a>
     </li>
   </ul>
 </nav>
@@ -452,7 +341,7 @@ human-readability of the serialized data.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
