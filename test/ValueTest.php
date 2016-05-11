@@ -22,8 +22,8 @@ class ValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreation()
     {
-        $valueObject = new Memory\Value('data data data ...', new DummyMovableContainer());
-        $this->assertInstanceOf('Zend\Memory\Value', $valueObject);
+        $valueObject = new Memory\Value('data data data ...', new TestAsset\DummyMovableContainer());
+        $this->assertInstanceOf(Memory\Value::class, $valueObject);
         $this->assertEquals($valueObject->getRef(), 'data data data ...');
     }
 
@@ -32,7 +32,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRef()
     {
-        $valueObject = new Memory\Value('0123456789', new DummyMovableContainer());
+        $valueObject = new Memory\Value('0123456789', new TestAsset\DummyMovableContainer());
         $valueRef = &$valueObject->getRef();
         $valueRef[3] = '_';
 
@@ -44,7 +44,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testToString()
     {
-        $valueObject = new Memory\Value('0123456789', new DummyMovableContainer());
+        $valueObject = new Memory\Value('0123456789', new TestAsset\DummyMovableContainer());
         $this->assertEquals($valueObject->__toString(), '0123456789');
 
         $this->assertEquals(strlen($valueObject), 10);
@@ -56,7 +56,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testArrayAccess()
     {
-        $valueObject = new Memory\Value('0123456789', new DummyMovableContainer());
+        $valueObject = new Memory\Value('0123456789', new TestAsset\DummyMovableContainer());
         $this->assertEquals($valueObject[8], '8');
 
         $valueObject[2] = '_';
@@ -68,24 +68,5 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $valueObject[10] = '_';
         $this->assertEquals((string) $valueObject, '01_3456789_');
         error_reporting($error_level);
-    }
-}
-
-class DummyMovableContainer extends Container\Movable
-{
-    /**
-     * Empty constructor
-     */
-    public function __construct()
-    {
-        // Do nothing
-    }
-
-    /**
-     * Dummy value update callback method
-     */
-    public function processUpdate()
-    {
-        // Do nothing
     }
 }

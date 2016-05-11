@@ -118,7 +118,11 @@ class Movable extends AbstractContainer
     public function __get($property)
     {
         if ($property != 'value') {
-            throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Unknown property: %s::$%s',
+                __CLASS__,
+                $property
+            ));
         }
 
         if (!($this->state & self::LOADED)) {
@@ -139,7 +143,11 @@ class Movable extends AbstractContainer
     public function __set($property, $value)
     {
         if ($property != 'value') {
-            throw new Exception\InvalidArgumentException('Unknown property: \Zend\Memory\Container\Movable::$' . $property);
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Unknown property: %s::$%s',
+                __CLASS__,
+                $property
+            ));
         }
 
         $this->state = self::LOADED;
