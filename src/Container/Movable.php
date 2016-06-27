@@ -244,8 +244,8 @@ class Movable extends AbstractContainer
      */
     public function markAsSwapped()
     {
-        // Clear LOADED state bit
-        $this->state |= self::LOADED;
+        // Set SWAPPED state bit
+        $this->state |= self::SWAPPED;
     }
 
     /**
