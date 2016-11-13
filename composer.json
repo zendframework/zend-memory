@@ -17,8 +17,8 @@
     },
     "require-dev": {
         "zendframework/zend-cache": "^2.7",
-        "squizlabs/php_codesniffer": "^2.3.1",
-        "phpunit/PHPUnit": "^4.8"
+        "phpunit/PHPUnit": "^4.8",
+        "zendframework/zend-coding-standard": "~1.0.0"
     },
     "suggest": {
         "zendframework/zend-cache": "To support swapping memory objects into and out of non-memory cache storage"
