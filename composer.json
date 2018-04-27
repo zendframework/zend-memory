@@ -17,8 +17,8 @@
     },
     "require-dev": {
         "zendframework/zend-cache": "^2.7",
-        "squizlabs/php_codesniffer": "^2.3.1",
-        "phpunit/PHPUnit": "^4.8"
+        "phpunit/PHPUnit": "^4.8",
+        "zendframework/zend-coding-standard": "~1.0.0"
     },
     "suggest": {
         "zendframework/zend-cache": "To support swapping memory objects into and out of non-memory cache storage"
@@ -41,10 +41,10 @@
             "@cs-check",
             "@test"
         ],
-        "upload-coverage": "coveralls -v",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "test": "phpunit",
-        "test-coverage": "phpunit --coverage-clover clover.xml"
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "upload-coverage": "coveralls -v"
     }
 }

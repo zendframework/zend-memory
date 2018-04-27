@@ -151,7 +151,7 @@ class MemoryManager
                     break;
             }
 
-            $this->memoryLimit = (int) ($this->memoryLimit*2/3);
+            $this->memoryLimit = (int) ($this->memoryLimit * 2 / 3);
         } // No limit otherwise
     }
 
@@ -396,7 +396,7 @@ class MemoryManager
             return;
         }
 
-        if (!$container->isSwapped()) {
+        if (! $container->isSwapped()) {
             $this->cache->setItem($this->managerId . $id, $container->getRef());
         }
 

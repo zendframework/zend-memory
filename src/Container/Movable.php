@@ -72,7 +72,7 @@ class Movable extends AbstractContainer
      */
     public function lock()
     {
-        if (!($this->state & self::LOADED)) {
+        if (! ($this->state & self::LOADED)) {
             $this->memManager->load($this, $this->id);
             $this->state |= self::LOADED;
         }
@@ -125,7 +125,7 @@ class Movable extends AbstractContainer
             ));
         }
 
-        if (!($this->state & self::LOADED)) {
+        if (! ($this->state & self::LOADED)) {
             $this->memManager->load($this, $this->id);
             $this->state |= self::LOADED;
         }
@@ -167,7 +167,7 @@ class Movable extends AbstractContainer
      */
     public function &getRef()
     {
-        if (!($this->state & self::LOADED)) {
+        if (! ($this->state & self::LOADED)) {
             $this->memManager->load($this, $this->id);
             $this->state |= self::LOADED;
         }
@@ -206,7 +206,7 @@ class Movable extends AbstractContainer
      */
     public function startTrace()
     {
-        if (!($this->state & self::LOADED)) {
+        if (! ($this->state & self::LOADED)) {
             $this->memManager->load($this, $this->id);
             $this->state |= self::LOADED;
         }
