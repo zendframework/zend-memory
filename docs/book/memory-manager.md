@@ -35,7 +35,7 @@ $cache = StorageFactory::factory([
 $memoryManager = new MemoryManager($cache);
 ```
 
-The `MemoryManager` uses [zend-cache storage adapters](http://zendframework.github.io/zend-cache/storage/adapter/)
+The `MemoryManager` uses [zend-cache storage adapters](http://docs.zendframework.com/zend-cache/storage/adapter/)
 to cache memory blocks; if no cache instance is provided, the system temporary
 directory is used. This is useful if you know that memory is not limited or the
 overall size of objects never reaches the memory limit.
