@@ -9,13 +9,14 @@
 
 namespace ZendTest\Memory;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Memory;
 use Zend\Memory\Container;
 
 /**
  * @group      Zend_Memory
  */
-class ValueTest extends \PHPUnit_Framework_TestCase
+class ValueTest extends TestCase
 {
     /**
      * tests the Value object creation

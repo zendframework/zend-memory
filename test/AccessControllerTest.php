@@ -9,6 +9,7 @@
 
 namespace ZendTest\Memory;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 use Zend\Memory;
@@ -17,7 +18,7 @@ use Zend\Memory\Container;
 /**
  * @group      Zend_Memory
  */
-class AccessControllerTest extends \PHPUnit_Framework_TestCase
+class AccessControllerTest extends TestCase
 {
     /**
      * Cache object

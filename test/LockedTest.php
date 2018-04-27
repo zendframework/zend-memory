@@ -9,12 +9,13 @@
 
 namespace ZendTest\Memory;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Memory\Container;
 
 /**
  * @group      Zend_Memory
  */
-class LockedTest extends \PHPUnit_Framework_TestCase
+class LockedTest extends TestCase
 {
     /**
      * tests the Movable memory container object creation

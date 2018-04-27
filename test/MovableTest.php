@@ -9,13 +9,14 @@
 
 namespace ZendTest\Memory;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Memory;
 use Zend\Memory\Container;
 
 /**
  * @group      Zend_Memory
  */
-class MovableTest extends \PHPUnit_Framework_TestCase
+class MovableTest extends TestCase
 {
     /**
      * tests the Movable memory container object creation
@@ -113,7 +114,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
-        $this->setExpectedException(Memory\Exception\InvalidArgumentException::class);
+        $this->expectException(Memory\Exception\InvalidArgumentException::class);
         $value = $memObject->unknowProperty;
     }
 
@@ -121,7 +122,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
-        $this->setExpectedException(Memory\Exception\InvalidArgumentException::class);
+        $this->expectException(Memory\Exception\InvalidArgumentException::class);
         $memObject->unknowProperty = 5;
     }
 }

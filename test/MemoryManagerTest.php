@@ -9,6 +9,7 @@
 
 namespace ZendTest\Memory;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
 use Zend\Memory;
@@ -16,7 +17,7 @@ use Zend\Memory;
 /**
  * @group      Zend_Memory
  */
-class MemoryManagerTest extends \PHPUnit_Framework_TestCase
+class MemoryManagerTest extends TestCase
 {
     /**
      * Cache object
@@ -129,7 +130,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
             $memObjects[] = $memObject;
         }
 
-        $this->setExpectedException(Memory\Exception\RuntimeException::class);
+        $this->expectException(Memory\Exception\RuntimeException::class);
         $memoryManager->create('a');
     }
 }
