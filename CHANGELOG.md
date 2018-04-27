@@ -2,9 +2,13 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.5.3 - TBD
+## 2.6.0 - TBD
 
 ### Added
+
+- [#18](https://github.com/zendframework/zend-memory/pull/18) adds support for PHP 7.1 and 7.2.
+
+### Changed
 
 - Nothing.
 
@@ -14,7 +18,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#18](https://github.com/zendframework/zend-memory/pull/18) removes support for PHP 5.5.
+
+- [#18](https://github.com/zendframework/zend-memory/pull/18) removes support for HHVM.
 
 ### Fixed
 
