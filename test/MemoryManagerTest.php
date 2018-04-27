@@ -10,8 +10,8 @@
 namespace ZendTest\Memory;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Memory;
 
 /**

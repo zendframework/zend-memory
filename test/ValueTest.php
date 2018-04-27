@@ -11,7 +11,6 @@ namespace ZendTest\Memory;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Memory;
-use Zend\Memory\Container;
 
 /**
  * @group      Zend_Memory
