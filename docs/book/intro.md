@@ -9,7 +9,7 @@ For example, if creating or loading a managed object would cause the total
 memory usage to exceed the limit you specify, some managed objects are copied to
 cache storage outside of memory. In this way, the total memory used by managed
 objects does not exceed the limit you need to enforce. To provide this
-functionality, the memory manager can compose [zend-cache storage adapters](http://zendframework.github.io/zend-cache/storage/adapter/)
+functionality, the memory manager can compose [zend-cache storage adapters](http://docs.zendframework.com/zend-cache/storage/adapter/)
 as storage providers.
 
 ## Usage
