@@ -24,7 +24,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#13](https://github.com/zendframework/zend-memory/pull/13) fixes the `Zend\Memory\Container\Movable::markAsSwapped()` method to correctly set
+  the SWAPPPED bit instead of the LOADED bit.
 
 ## 2.5.2 - 2016-05-11
 
