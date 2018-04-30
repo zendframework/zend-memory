@@ -1,22 +1,21 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-memory for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-memory/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Memory;
 
-use Zend\Cache\StorageFactory as CacheFactory;
+use PHPUnit\Framework\TestCase;
 use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter;
+use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Memory;
 
 /**
  * @group      Zend_Memory
  */
-class MemoryManagerTest extends \PHPUnit_Framework_TestCase
+class MemoryManagerTest extends TestCase
 {
     /**
      * Cache object
@@ -54,13 +53,13 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new Memory\MemoryManager($this->cache);
 
         // MemoryLimit
-        $memoryManager->setMemoryLimit(2*1024*1024 /* 2Mb */);
-        $this->assertEquals($memoryManager->getMemoryLimit(), 2*1024*1024);
+        $memoryManager->setMemoryLimit(2 * 1024 * 1024 /* 2Mb */);
+        $this->assertEquals($memoryManager->getMemoryLimit(), 2 * 1024 * 1024);
 
         // MinSize
-        $this->assertEquals($memoryManager->getMinSize(), 16*1024); // check for default value (16K)
-        $memoryManager->setMinSize(4*1024 /* 4Kb */);
-        $this->assertEquals($memoryManager->getMinSize(), 4*1024);
+        $this->assertEquals($memoryManager->getMinSize(), 16 * 1024); // check for default value (16K)
+        $memoryManager->setMinSize(4 * 1024 /* 4Kb */);
+        $this->assertEquals($memoryManager->getMinSize(), 4 * 1024);
     }
 
     /**
@@ -95,7 +94,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         $memoryManager = new Memory\MemoryManager($this->cache);
 
         $memoryManager->setMinSize(256);
-        $memoryManager->setMemoryLimit(1024*32);
+        $memoryManager->setMemoryLimit(1024 * 32);
 
         $memObjects = [];
         for ($count = 0; $count < 64; $count++) {
@@ -129,7 +128,7 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
             $memObjects[] = $memObject;
         }
 
-        $this->setExpectedException(Memory\Exception\RuntimeException::class);
+        $this->expectException(Memory\Exception\RuntimeException::class);
         $memoryManager->create('a');
     }
 }

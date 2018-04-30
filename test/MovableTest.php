@@ -1,21 +1,20 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-memory for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-memory/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Memory;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Memory;
 use Zend\Memory\Container;
 
 /**
  * @group      Zend_Memory
  */
-class MovableTest extends \PHPUnit_Framework_TestCase
+class MovableTest extends TestCase
 {
     /**
      * tests the Movable memory container object creation
@@ -113,7 +112,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
-        $this->setExpectedException(Memory\Exception\InvalidArgumentException::class);
+        $this->expectException(Memory\Exception\InvalidArgumentException::class);
         $value = $memObject->unknowProperty;
     }
 
@@ -121,7 +120,7 @@ class MovableTest extends \PHPUnit_Framework_TestCase
     {
         $memoryManager = new TestAsset\DummyMemoryManager();
         $memObject = new Container\Movable($memoryManager, 10, '0123456789');
-        $this->setExpectedException(Memory\Exception\InvalidArgumentException::class);
+        $this->expectException(Memory\Exception\InvalidArgumentException::class);
         $memObject->unknowProperty = 5;
     }
 }
