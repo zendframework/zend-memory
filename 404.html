@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zend-memory">  
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="//img/favicon.ico">
 
-    <title>Memory Manager - zend-memory - Zend Framework Docs</title>
+    <title>zend-memory - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-f3b53f5ceb.css">
+    <link rel="stylesheet" href="//css/styles-f3b53f5ceb.css">
 </head>
 <body id="page-top">
 
@@ -31,7 +31,7 @@
             
             <span class="navbar-brand">
                 <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
-                    <img src="../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                    <img src="//img/zend-framework-logo.svg" height="28" alt="Zend Framework">
                 </a>
             </span>
         </div>
@@ -66,7 +66,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-memory</a>
+            <a href="/.">zend-memory</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,7 +75,7 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Intro</a>
+                        <a href="/intro/" class="subnavigation__link">Intro</a>
                     </li>
                 
             
@@ -85,14 +85,14 @@
                         <ul class="subnavigation__list">
                             
                                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Memory Manager</a>
+    <li class="subnavigation__list-item ">
+        <a href="/memory-manager/" class="subnavigation__link">Memory Manager</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../memory-objects/" class="subnavigation__link">Memory Objects</a>
+        <a href="/memory-objects/" class="subnavigation__link">Memory Objects</a>
     </li>
 
                             
@@ -169,191 +169,18 @@
             <div class="col-md-9 col-xs-12 content" role="main">
             <!-- content:begin -->
                 
-                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-    <li><a href="https://framework.zend.com/">Home</a></li>
 
-    
-        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-        
-            <li><a href="..">zend-memory</a></li>
-
-            
-                
-                    <li>Reference</li>
-                
-            
-
-            <li class="active">Memory Manager</li>
-        
-    
-</ol>
+<a href="/" class="btn btn-default" role="button">Go to homepage</a>
 
 
-    
-        <h2 class="chapter__headline">Reference</h2>
-    
-
-    
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">In This Article</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#creating-a-memory-manager" class="toc__link">Creating a Memory Manager</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#managing-memory-objects" class="toc__link">Managing Memory Objects</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#settings" class="toc__link">Settings</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
-
-    <h1 id="memory-manager">Memory Manager</h1>
-<h2 id="creating-a-memory-manager">Creating a Memory Manager</h2>
-<p>You can create new a memory manager (<code>Zend\Memory\MemoryManager</code> object) using its constructor:</p>
-<pre class="codehilite"><code class="language-php">__construct(Zend\Cache\Storage\StorageInterface $cache = null) : void</code></pre>
-
-<p>As an example, the following creates an instance which <em>is not</em> backed by cache
-storage:</p>
-<pre class="codehilite"><code class="language-php">$memoryManager = new Zend\Memory\MemoryManager();</code></pre>
-
-<p>While the following creates an instance backed by a filesystem cache storage
-adapter, storing memory blocks in the <code>tmp/</code> directory of the current working
-directory:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Cache\StorageFactory;
-use Zend\Memory\MemoryManager;
-
-$cache = StorageFactory::factory([
-    'adapter' =&gt; [
-        'name' =&gt; 'Filesystem',
-        'options' =&gt; [
-            'cache_dir' =&gt; './tmp/', // Directory in which to put swapped memory blocks
-        ],
-    ],
-]);
-
-$memoryManager = new MemoryManager($cache);</code></pre>
-
-<p>The <code>MemoryManager</code> uses <a href="http://docs.zendframework.com/zend-cache/storage/adapter/">zend-cache storage adapters</a>
-to cache memory blocks; if no cache instance is provided, the system temporary
-directory is used. This is useful if you know that memory is not limited or the
-overall size of objects never reaches the memory limit.</p>
-<h2 id="managing-memory-objects">Managing Memory Objects</h2>
-<p>This section describes creating and destroying objects in the managed memory,
-and settings to control memory manager behavior.</p>
-<h3 id="creating-movable-objects">Creating Movable Objects</h3>
-<p>Create movable objects (objects which may be swapped into cache storage) using
-the <code>Zend\Memory\MemoryManager::create([$data])</code> method:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);</code></pre>
-
-<p>The <code>$data</code> argument is optional and used to initialize the object value. If the
-<code>$data</code> argument is omitted, the value is an empty string.</p>
-<h3 id="creating-locked-objects">Creating Locked Objects</h3>
-<p>Create locked objects (objects which will never be swapped into cache storage)
-using the <code>Zend\Memory\MemoryManager::createLocked([$data])</code> method:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;createLocked($data);</code></pre>
-
-<p>The <code>$data</code> argument is optional and used to initialize the object value. If the
-<code>$data</code> argument is omitted, the value is an empty string.</p>
-<h3 id="destroying-objects">Destroying Objects</h3>
-<p>Memory objects are automatically destroyed and removed from memory when they go
-out of scope:</p>
-<pre class="codehilite"><code class="language-php">function foo() use ($memoryManager, $memList) {
-    // ...
-
-    $memObject1 = $memoryManager-&gt;create($data1);
-    $memObject2 = $memoryManager-&gt;create($data2);
-    $memObject3 = $memoryManager-&gt;create($data3);
-
-    // ...
-
-    $memList[] = $memObject3;
-
-    // ...
-
-    unset($memObject2); // $memObject2 is destroyed here
-
-    // ...
-    // $memObject1 is destroyed here
-    // but $memObject3 object is still referenced by $memList
-    // and is not destroyed
-}</code></pre>
-
-<p>This applies to both movable and locked objects.</p>
-<h2 id="settings">Settings</h2>
-<h3 id="memory-limit">Memory Limit</h3>
-<p>The memory limit is the maximum number of bytes allowed for use by loaded
-movable objects.</p>
-<p>If loading or creation of an object causes memory usage to exceed of this limit,
-then the memory manager swaps some other objects.</p>
-<p>You can retrieve or set the memory limit setting using the <code>getMemoryLimit()</code> and
-<code>setMemoryLimit($newLimit)</code> methods:</p>
-<pre class="codehilite"><code class="language-php">$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
-$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</code></pre>
-
-<p>A negative value for memory limit means 'no limit'.</p>
-<p>The default value is two-thirds of the value of <code>memory_limit</code> in <code>php.ini</code> or
-'no limit' (-1) if <code>memory_limit</code> is not set in <code>php.ini</code>.</p>
-<h3 id="minsize">MinSize</h3>
-<p>The <code>MinSize</code> is the minimum size an object must be before it will be swapped to a
-cache backend; objects with sizes smaller than this value will not be swapped.
-This reduces the number of swap/load operations.</p>
-<p>You can retrieve or set the minimum size using the <code>getMinSize()</code> and
-<code>setMinSize($newSize)</code> methods:</p>
-<pre class="codehilite"><code class="language-php">$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
-$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</code></pre>
-
-<p>The default minimum size value is 16KB (16384 bytes).</p>
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../memory-objects/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-memory/edit/master/docs/book/memory-manager.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             <!-- content:end -->
             </div>
             <div class="col-md-3 col-xs-12 sidebar">
@@ -369,7 +196,7 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-memory</a>
+            <a href="/.">zend-memory</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -378,7 +205,7 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Intro</a>
+                        <a href="/intro/" class="subnavigation__link">Intro</a>
                     </li>
                 
             
@@ -388,14 +215,14 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
                         <ul class="subnavigation__list">
                             
                                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Memory Manager</a>
+    <li class="subnavigation__list-item ">
+        <a href="/memory-manager/" class="subnavigation__link">Memory Manager</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../memory-objects/" class="subnavigation__link">Memory Objects</a>
+        <a href="/memory-objects/" class="subnavigation__link">Memory Objects</a>
     </li>
 
                             
@@ -474,11 +301,11 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
 </footer>
 
     <script>
-        var base_url = '..',
+        var base_url = '/',
             siteName = 'zend-memory';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="//js/scripts-8d7ae56abf.js"></script>
+        <script src="/search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
