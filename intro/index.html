@@ -248,14 +248,13 @@ functionality, the memory manager can compose <a href="http://docs.zendframework
 as storage providers.</p>
 <h2 id="usage">Usage</h2>
 <p>Instantiate the memory manager class:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Memory\MemoryManager;
+<p> <pre class=codehilite><code class=language-php>use Zend\Memory\MemoryManager;
 
 // No caching backend:
-$memoryManager = new MemoryManager();</code></pre>
-
+$memoryManager = new MemoryManager();</code></pre></p>
 <p>Optionally, you can create a cache storage adapter, and pass it to the
 <code>MemoryManager</code> constructor:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Cache\StorageFactory;
+<p> <pre class=codehilite><code class=language-php>use Zend\Cache\StorageFactory;
 use Zend\Memory\MemoryManager;
 
 // Use a filesystem adapter, placing memory blocks in the tmp directory
@@ -267,11 +266,10 @@ $cache = StorageFactory::factory([
     ],
 ]);
 
-$memoryManager = new MemoryManager($cache);</code></pre>
-
+$memoryManager = new MemoryManager($cache);</code></pre></p>
 <p>Once you have a <code>MemoryManager</code> instance, you can start pushing values to it and
 pulling values from it.</p>
-<pre class="codehilite"><code class="language-php">$loadedFiles = array();
+<p> <pre class=codehilite><code class=language-php>$loadedFiles = array();
 
 for ($count = 0; $count &lt; 10000; $count++) {
     $f = fopen($fileNames[$count], 'rb');
@@ -285,8 +283,7 @@ echo $loadedFiles[$index1]-&gt;value;
 
 $loadedFiles[$index2]-&gt;value = $newValue;
 
-$loadedFiles[$index3]-&gt;value[$charIndex] = '_';</code></pre>
-
+$loadedFiles[$index3]-&gt;value[$charIndex] = '_';</code></pre></p>
 <h2 id="theory-of-operation">Theory of Operation</h2>
 <p>zend-memory operates with the following concepts:</p>
 <ul>
@@ -295,14 +292,14 @@ $loadedFiles[$index3]-&gt;value[$charIndex] = '_';</code></pre>
 <li>Locked memory object</li>
 <li>Movable memory object</li>
 </ul>
-<h3 id="memory-manager">Memory manager</h3>
+<h3>Memory manager</h3>
 <p>The memory manager generates memory objects (locked or movable) by request of
 the application, and returns them wrapped into a memory container object.</p>
-<h3 id="memory-container">Memory container</h3>
+<h3>Memory container</h3>
 <p>The memory container has a virtual or actual <code>value</code> attribute of type <code>string</code>.
 This attribute contains the data value specified at memory object creation time.</p>
 <p>You can operate with this <code>value</code> attribute as an object property:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);
+<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);
 
 echo $memObject-&gt;value;
 
@@ -312,12 +309,11 @@ $memObject-&gt;value[$index] = '_';
 
 echo ord($memObject-&gt;value[$index1]);
 
-$memObject-&gt;value = substr($memObject-&gt;value, $start, $length);</code></pre>
-
-<h3 id="locked-memory">Locked memory</h3>
+$memObject-&gt;value = substr($memObject-&gt;value, $start, $length);</code></pre></p>
+<h3>Locked memory</h3>
 <p>Locked memory objects are always stored in memory. Data stored in locked memory
 are never swapped to the cache backend.</p>
-<h3 id="movable-memory">Movable memory</h3>
+<h3>Movable memory</h3>
 <p>Movable memory objects are transparently swapped and loaded to/from the cache
 backend by the <code>MemoryManager</code> when necessary.</p>
 <p>The memory manager does not swap objects with size less than the specified
@@ -356,7 +352,7 @@ for more details.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-memory/edit/master/docs/intro.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-memory/edit/master/docs/book/intro.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

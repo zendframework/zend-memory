@@ -252,16 +252,14 @@
     <h1 id="memory-manager">Memory Manager</h1>
 <h2 id="creating-a-memory-manager">Creating a Memory Manager</h2>
 <p>You can create new a memory manager (<code>Zend\Memory\MemoryManager</code> object) using its constructor:</p>
-<pre class="codehilite"><code class="language-php">__construct(Zend\Cache\Storage\StorageInterface $cache = null) : void</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>__construct(Zend\Cache\Storage\StorageInterface $cache = null) : void</code></pre></p>
 <p>As an example, the following creates an instance which <em>is not</em> backed by cache
 storage:</p>
-<pre class="codehilite"><code class="language-php">$memoryManager = new Zend\Memory\MemoryManager();</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$memoryManager = new Zend\Memory\MemoryManager();</code></pre></p>
 <p>While the following creates an instance backed by a filesystem cache storage
 adapter, storing memory blocks in the <code>tmp/</code> directory of the current working
 directory:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Cache\StorageFactory;
+<p> <pre class=codehilite><code class=language-php>use Zend\Cache\StorageFactory;
 use Zend\Memory\MemoryManager;
 
 $cache = StorageFactory::factory([
@@ -273,8 +271,7 @@ $cache = StorageFactory::factory([
     ],
 ]);
 
-$memoryManager = new MemoryManager($cache);</code></pre>
-
+$memoryManager = new MemoryManager($cache);</code></pre></p>
 <p>The <code>MemoryManager</code> uses <a href="http://docs.zendframework.com/zend-cache/storage/adapter/">zend-cache storage adapters</a>
 to cache memory blocks; if no cache instance is provided, the system temporary
 directory is used. This is useful if you know that memory is not limited or the
@@ -282,24 +279,22 @@ overall size of objects never reaches the memory limit.</p>
 <h2 id="managing-memory-objects">Managing Memory Objects</h2>
 <p>This section describes creating and destroying objects in the managed memory,
 and settings to control memory manager behavior.</p>
-<h3 id="creating-movable-objects">Creating Movable Objects</h3>
+<h3>Creating Movable Objects</h3>
 <p>Create movable objects (objects which may be swapped into cache storage) using
 the <code>Zend\Memory\MemoryManager::create([$data])</code> method:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);</code></pre></p>
 <p>The <code>$data</code> argument is optional and used to initialize the object value. If the
 <code>$data</code> argument is omitted, the value is an empty string.</p>
-<h3 id="creating-locked-objects">Creating Locked Objects</h3>
+<h3>Creating Locked Objects</h3>
 <p>Create locked objects (objects which will never be swapped into cache storage)
 using the <code>Zend\Memory\MemoryManager::createLocked([$data])</code> method:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;createLocked($data);</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;createLocked($data);</code></pre></p>
 <p>The <code>$data</code> argument is optional and used to initialize the object value. If the
 <code>$data</code> argument is omitted, the value is an empty string.</p>
-<h3 id="destroying-objects">Destroying Objects</h3>
+<h3>Destroying Objects</h3>
 <p>Memory objects are automatically destroyed and removed from memory when they go
 out of scope:</p>
-<pre class="codehilite"><code class="language-php">function foo() use ($memoryManager, $memList) {
+<p> <pre class=codehilite><code class=language-php>function foo() use ($memoryManager, $memList) {
     // ...
 
     $memObject1 = $memoryManager-&gt;create($data1);
@@ -318,32 +313,29 @@ out of scope:</p>
     // $memObject1 is destroyed here
     // but $memObject3 object is still referenced by $memList
     // and is not destroyed
-}</code></pre>
-
+}</code></pre></p>
 <p>This applies to both movable and locked objects.</p>
 <h2 id="settings">Settings</h2>
-<h3 id="memory-limit">Memory Limit</h3>
+<h3>Memory Limit</h3>
 <p>The memory limit is the maximum number of bytes allowed for use by loaded
 movable objects.</p>
 <p>If loading or creation of an object causes memory usage to exceed of this limit,
 then the memory manager swaps some other objects.</p>
 <p>You can retrieve or set the memory limit setting using the <code>getMemoryLimit()</code> and
 <code>setMemoryLimit($newLimit)</code> methods:</p>
-<pre class="codehilite"><code class="language-php">$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
-$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
+$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</code></pre></p>
 <p>A negative value for memory limit means 'no limit'.</p>
 <p>The default value is two-thirds of the value of <code>memory_limit</code> in <code>php.ini</code> or
 'no limit' (-1) if <code>memory_limit</code> is not set in <code>php.ini</code>.</p>
-<h3 id="minsize">MinSize</h3>
+<h3>MinSize</h3>
 <p>The <code>MinSize</code> is the minimum size an object must be before it will be swapped to a
 cache backend; objects with sizes smaller than this value will not be swapped.
 This reduces the number of swap/load operations.</p>
 <p>You can retrieve or set the minimum size using the <code>getMinSize()</code> and
 <code>setMinSize($newSize)</code> methods:</p>
-<pre class="codehilite"><code class="language-php">$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
-$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
+$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</code></pre></p>
 <p>The default minimum size value is 16KB (16384 bytes).</p>
 
 
@@ -378,7 +370,7 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-memory/edit/master/docs/memory-manager.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-memory/edit/master/docs/book/memory-manager.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

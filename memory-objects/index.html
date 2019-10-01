@@ -259,15 +259,13 @@
 unloaded from memory when not in active use.</p>
 <p>Create movable memory objects using the <code>create([$data])</code> method of the memory
 manager:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);</code></pre></p>
 <p>Such objects will be retrieved from the cache and/or memor when accessed again.</p>
 <h2 id="locked">Locked</h2>
 <p>"Locked" memory objects will never be swapped to cache or unloaded from memory.</p>
 <p>Create locked memory objects using the <code>createLocked([$data])</code> method of the
 memory manager:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;createLocked($data);</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;createLocked($data);</code></pre></p>
 <p>Locked objects implement the same interface as movable objects
 (<code>Zend\Memory\Container\Interface</code>), and can be used interchangably with movable
 objects. Use them when you have performance considerations that dictate keeping
@@ -279,7 +277,7 @@ dereference to get the class property.</p>
 <h2 id="memory-container-value-property">Memory container 'value' property</h2>
 <p>Use the memory container (movable or locked) <code>value</code> property to operate with
 memory object data:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);
+<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);
 
 echo $memObject-&gt;value;
 
@@ -289,15 +287,13 @@ $memObject-&gt;value[$index] = '_';
 
 echo ord($memObject-&gt;value[$index1]);
 
-$memObject-&gt;value = substr($memObject-&gt;value, $start, $length);</code></pre>
-
+$memObject-&gt;value = substr($memObject-&gt;value, $start, $length);</code></pre></p>
 <p>An alternative way to access memory object data is to use the
 <a href="#getref-method">getRef()</a>; method.</p>
 <h2 id="memory-container-interface">Memory container interface</h2>
 <p>Each memory container type provides the following methods:</p>
-<h3 id="getref-method">getRef() method</h3>
-<pre class="codehilite"><code class="language-php">&amp;getRef() : mixed</code></pre>
-
+<h3>getRef() method</h3>
+<p> <pre class=codehilite><code class=language-php>&amp;getRef() : mixed</code></pre></p>
 <p>The <code>getRef()</code> method returns a reference to the object value.</p>
 <p>Movable objects are loaded from the cache at this moment if the object is not
 already in memory. If the object is loaded from the cache, this might cause
@@ -308,21 +304,19 @@ returns a reference to the string value used to store the data, which is changed
 directly by user application. Use the <code>getRef()</code> method for value data
 processing where you want to ensure the data changes without necessarily
 interacting directly with the memory container:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);
+<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);
 
 $value = &amp;$memObject-&gt;getRef();
 
 for ($count = 0; $count &lt; strlen($value); $count++) {
     $char = $value[$count];
     // ...
-}</code></pre>
-
-<h3 id="touch-method">touch() method</h3>
-<pre class="codehilite"><code class="language-php">touch() : void</code></pre>
-
+}</code></pre></p>
+<h3>touch() method</h3>
+<p> <pre class=codehilite><code class=language-php>touch() : void</code></pre></p>
 <p>The <code>touch()</code> method should be used in conjunction with <code>getRef()</code>. It signals
 that object value has been changed:</p>
-<pre class="codehilite"><code class="language-php">$memObject = $memoryManager-&gt;create($data);
+<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);
 ...
 
 $value = &amp;$memObject-&gt;getRef();
@@ -335,11 +329,9 @@ for ($count = 0; $count &lt; strlen($value); $count++) {
     // ...
 }
 
-$memObject-&gt;touch();</code></pre>
-
-<h3 id="lock-method">lock() method</h3>
-<pre class="codehilite"><code class="language-php">lock() : void</code></pre>
-
+$memObject-&gt;touch();</code></pre></p>
+<h3>lock() method</h3>
+<p> <pre class=codehilite><code class=language-php>lock() : void</code></pre></p>
 <p>The <code>lock()</code> methods locks the object in memory. It should be used to prevent
 swapping of the object.  Normally, this is not necessary, because the memory
 manager uses an intelligent algorithm to choose candidates for swapping. But if
@@ -347,7 +339,7 @@ you know that at a specific point in the code an object should not be swapped,
 you may lock it.</p>
 <p>Locking objects in memory also guarantees that the reference returned by the
 <code>getRef()</code> method is valid until you unlock the object:</p>
-<pre class="codehilite"><code class="language-php">$memObject1 = $memoryManager-&gt;create($data1);
+<p> <pre class=codehilite><code class=language-php>$memObject1 = $memoryManager-&gt;create($data1);
 $memObject2 = $memoryManager-&gt;create($data2);
 ...
 
@@ -363,16 +355,13 @@ for ($count = 0; $count &lt; strlen($value2); $count++) {
 
 $memObject1-&gt;touch();
 $memObject1-&gt;unlock();
-$memObject2-&gt;unlock();</code></pre>
-
-<h3 id="unlock-method">unlock() method</h3>
-<pre class="codehilite"><code class="language-php">unlock() : void</code></pre>
-
+$memObject2-&gt;unlock();</code></pre></p>
+<h3>unlock() method</h3>
+<p> <pre class=codehilite><code class=language-php>unlock() : void</code></pre></p>
 <p>The <code>unlock()</code> method unlocks object when it's no longer necessary to be locked.
 See the example above.</p>
-<h3 id="islocked-method">isLocked() method</h3>
-<pre class="codehilite"><code class="language-php">isLocked() : bool</code></pre>
-
+<h3>isLocked() method</h3>
+<p> <pre class=codehilite><code class=language-php>isLocked() : bool</code></pre></p>
 <p>The <code>isLocked()</code> method can be used to check if object is locked. It returns
 <code>true</code> if the object is locked, or <code>false</code> if it is not locked. This is always
 <code>true</code> for "locked" objects, and may be either <code>true</code> or <code>false</code> for "movable"
@@ -406,7 +395,7 @@ objects.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-memory/edit/master/docs/memory-objects.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-memory/edit/master/docs/book/memory-objects.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
