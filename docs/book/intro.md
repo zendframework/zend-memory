@@ -46,7 +46,7 @@ Once you have a `MemoryManager` instance, you can start pushing values to it and
 pulling values from it.
 
 ```php
-$loadedFiles = array();
+$loadedFiles = [];
 
 for ($count = 0; $count < 10000; $count++) {
     $f = fopen($fileNames[$count], 'rb');
