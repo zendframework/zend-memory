@@ -1,12 +1,11 @@
 docs_dir: docs/book
 site_dir: docs/html
-pages:
-    - index.md
-    - Intro: intro.md
+nav:
+    - Home: index.md
+    - Introduction: intro.md
     - Reference:
         - "Memory Manager": memory-manager.md
         - "Memory Objects": memory-objects.md
 site_name: zend-memory
-site_description: zend-memory
+site_description: "Manage data in an environment with limited memory"
 repo_url: 'https://github.com/zendframework/zend-memory'
-copyright: 'Copyright (c) 2005-2018 <a href="https://www.zend.com/">Zend Technologies USA Inc.</a>'
