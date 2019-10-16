@@ -269,7 +269,7 @@ $cache = StorageFactory::factory([
 $memoryManager = new MemoryManager($cache);</code></pre></p>
 <p>Once you have a <code>MemoryManager</code> instance, you can start pushing values to it and
 pulling values from it.</p>
-<p> <pre class=codehilite><code class=language-php>$loadedFiles = array();
+<p> <pre class=codehilite><code class=language-php>$loadedFiles = [];
 
 for ($count = 0; $count &lt; 10000; $count++) {
     $f = fopen($fileNames[$count], 'rb');
