@@ -2,7 +2,7 @@
 
 > ## Repository abandoned 2019-12-31
 >
-> This repository has moved to laminas/laminas-memory.
+> This repository has moved to [laminas/laminas-memory](https://github.com/laminas/laminas-memory).
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-memory.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-memory)
 [![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-memory/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-memory?branch=master)
