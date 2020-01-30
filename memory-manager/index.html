@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Manage data in an environment with limited memory">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-memory/memory-manager/">
+    <link rel="canonical" href="https://docs.zendframework.com/memory-manager/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Memory Manager - zend-memory - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -175,9 +175,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-memory/">laminas/laminas-memory.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -252,14 +252,18 @@
     <h1 id="memory-manager">Memory Manager</h1>
 <h2 id="creating-a-memory-manager">Creating a Memory Manager</h2>
 <p>You can create new a memory manager (<code>Zend\Memory\MemoryManager</code> object) using its constructor:</p>
-<p> <pre class=codehilite><code class=language-php>__construct(Zend\Cache\Storage\StorageInterface $cache = null) : void</code></pre></p>
+<pre><code class="language-php">__construct(Zend\Cache\Storage\StorageInterface $cache = null) : void
+</code></pre>
+
 <p>As an example, the following creates an instance which <em>is not</em> backed by cache
 storage:</p>
-<p> <pre class=codehilite><code class=language-php>$memoryManager = new Zend\Memory\MemoryManager();</code></pre></p>
+<pre><code class="language-php">$memoryManager = new Zend\Memory\MemoryManager();
+</code></pre>
+
 <p>While the following creates an instance backed by a filesystem cache storage
 adapter, storing memory blocks in the <code>tmp/</code> directory of the current working
 directory:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Cache\StorageFactory;
+<pre><code class="language-php">use Zend\Cache\StorageFactory;
 use Zend\Memory\MemoryManager;
 
 $cache = StorageFactory::factory([
@@ -271,7 +275,9 @@ $cache = StorageFactory::factory([
     ],
 ]);
 
-$memoryManager = new MemoryManager($cache);</code></pre></p>
+$memoryManager = new MemoryManager($cache);
+</code></pre>
+
 <p>The <code>MemoryManager</code> uses <a href="http://docs.zendframework.com/zend-cache/storage/adapter/">zend-cache storage adapters</a>
 to cache memory blocks; if no cache instance is provided, the system temporary
 directory is used. This is useful if you know that memory is not limited or the
@@ -282,19 +288,23 @@ and settings to control memory manager behavior.</p>
 <h3>Creating Movable Objects</h3>
 <p>Create movable objects (objects which may be swapped into cache storage) using
 the <code>Zend\Memory\MemoryManager::create([$data])</code> method:</p>
-<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;create($data);</code></pre></p>
+<pre><code class="language-php">$memObject = $memoryManager-&gt;create($data);
+</code></pre>
+
 <p>The <code>$data</code> argument is optional and used to initialize the object value. If the
 <code>$data</code> argument is omitted, the value is an empty string.</p>
 <h3>Creating Locked Objects</h3>
 <p>Create locked objects (objects which will never be swapped into cache storage)
 using the <code>Zend\Memory\MemoryManager::createLocked([$data])</code> method:</p>
-<p> <pre class=codehilite><code class=language-php>$memObject = $memoryManager-&gt;createLocked($data);</code></pre></p>
+<pre><code class="language-php">$memObject = $memoryManager-&gt;createLocked($data);
+</code></pre>
+
 <p>The <code>$data</code> argument is optional and used to initialize the object value. If the
 <code>$data</code> argument is omitted, the value is an empty string.</p>
 <h3>Destroying Objects</h3>
 <p>Memory objects are automatically destroyed and removed from memory when they go
 out of scope:</p>
-<p> <pre class=codehilite><code class=language-php>function foo() use ($memoryManager, $memList) {
+<pre><code class="language-php">function foo() use ($memoryManager, $memList) {
     // ...
 
     $memObject1 = $memoryManager-&gt;create($data1);
@@ -313,7 +323,9 @@ out of scope:</p>
     // $memObject1 is destroyed here
     // but $memObject3 object is still referenced by $memList
     // and is not destroyed
-}</code></pre></p>
+}
+</code></pre>
+
 <p>This applies to both movable and locked objects.</p>
 <h2 id="settings">Settings</h2>
 <h3>Memory Limit</h3>
@@ -323,8 +335,10 @@ movable objects.</p>
 then the memory manager swaps some other objects.</p>
 <p>You can retrieve or set the memory limit setting using the <code>getMemoryLimit()</code> and
 <code>setMemoryLimit($newLimit)</code> methods:</p>
-<p> <pre class=codehilite><code class=language-php>$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
-$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes</code></pre></p>
+<pre><code class="language-php">$oldLimit = $memoryManager-&gt;getMemoryLimit();  // Get memory limit in bytes
+$memoryManager-&gt;setMemoryLimit($newLimit);     // Set memory limit in bytes
+</code></pre>
+
 <p>A negative value for memory limit means 'no limit'.</p>
 <p>The default value is two-thirds of the value of <code>memory_limit</code> in <code>php.ini</code> or
 'no limit' (-1) if <code>memory_limit</code> is not set in <code>php.ini</code>.</p>
@@ -334,8 +348,10 @@ cache backend; objects with sizes smaller than this value will not be swapped.
 This reduces the number of swap/load operations.</p>
 <p>You can retrieve or set the minimum size using the <code>getMinSize()</code> and
 <code>setMinSize($newSize)</code> methods:</p>
-<p> <pre class=codehilite><code class=language-php>$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
-$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</code></pre></p>
+<pre><code class="language-php">$oldMinSize = $memoryManager-&gt;getMinSize();  // Get MinSize in bytes
+$memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes
+</code></pre>
+
 <p>The default minimum size value is 16KB (16384 bytes).</p>
 
 
@@ -478,7 +494,7 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -486,10 +502,10 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -497,27 +513,28 @@ $memoryManager-&gt;setMinSize($newSize);        // Set MinSize limit in bytes</c
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-memory';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
